@@ -2,6 +2,7 @@ from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated, SAFE_METHODS, BasePermission
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.contrib.auth.models import User
 from .models import Student
 from .serializers import StudentSerializer, RegisterSerializer
 
@@ -22,7 +23,7 @@ class StudentViewSet(viewsets.ModelViewSet):
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
     permission_classes = [IsAuthenticated]
-    queryset = []
+    queryset = User.objects.all()
 
 
 @api_view(['GET'])
